@@ -32,6 +32,6 @@ jobs:
 
     - run: buildah version
 
-    - run: buildah bud --debug --net=host --manifest localhost/doge-image --platform linux/arm64,linux/amd64,linux/ppc64le,linux/s390x .
+    - run: set -e ; for arch in arm64 amd64 ppc64le s390x ; do buildah bud --debug --net=host --manifest localhost/doge-image --platform linux/$arch . ; done
 
     - run: podman manifest push --all localhost/doge-image quay.io/nalind/doge-image
