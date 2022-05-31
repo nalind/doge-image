@@ -24,7 +24,10 @@ jobs:
     - run: sudo podman run --net=host --rm --privileged ghcr.io/nalind/fedora-qemu-user-static register
 
     - uses: redhat-actions/buildah-build@v2
-        with:
-          extra-args: --all-platforms --manifest localhost/doge-image
+      with:
+        containerfiles: Dockerfile
+        context: .
+        image: localhost/nonce
+        extra-args: --all-platforms --manifest localhost/doge-image
 
     - run: podman manifest push --all localhost/doge-image quay.io/nalind/doge-image
