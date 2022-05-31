@@ -32,6 +32,6 @@ jobs:
 
     - run: buildah version
 
-    - run: buildah bud --net=host --manifest --all-platforms localhost/doge-image .
+    - run: buildah bud --net=host --manifest localhost/doge-image --all-platforms .
 
     - run: podman manifest push --all localhost/doge-image quay.io/nalind/doge-image
