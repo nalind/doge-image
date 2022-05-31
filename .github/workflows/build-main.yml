@@ -17,8 +17,8 @@ jobs:
 
     - uses: redhat-actions/podman-login@v1
       with:
-        username: ${{ env.QUAY_ROBOT_NAME }}
-        password: ${{ env.QUAY_ROBOT_PASSWORD }}
+        username: ${{ secrets.QUAY_ROBOT_NAME }}
+        password: ${{ secrets.QUAY_ROBOT_PASSWORD }}
         registry: quay.io
 
     - run: sudo podman run --net=host --rm --privileged ghcr.io/nalind/fedora-qemu-user-static register
