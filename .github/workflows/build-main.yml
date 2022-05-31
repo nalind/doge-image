@@ -25,6 +25,6 @@ jobs:
 
     - uses: redhat-actions/buildah-build@v2
         with:
-          extra-args: --all-platforms --manifest doge-image
+          extra-args: --all-platforms --manifest localhost/doge-image
 
-    - run: podman manifest push --all doge-image quay.io/nalind/doge-image
+    - run: podman manifest push --all localhost/doge-image quay.io/nalind/doge-image
