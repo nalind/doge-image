@@ -1,0 +1,30 @@
+name: Build and Push
+
+# on:
+#   push:
+#     branches: [ main ]
+
+jobs:
+  build-and-push:
+    name: Build and Push
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: install podman
+      run: sudo apt-get -y install podman
+
+    - uses: redhat-actions/podman-login@v1
+      with:
+        username: unused
+        password: ${{ env.QUAY_ROBOT_TOKEN }}
+        registry: quay.io
+
+    - run: sudo podman run --net=host --rm --privileged ghcr.io/nalind/fedora-qemu-user-static register
+
+    - uses: redhat-actions/buildah-build
+        with:
+          extra-args: --all-platforms --manifest doge-image
+
+    - run: podman manifest push --all doge-image quay.io/nalind/doge-image
