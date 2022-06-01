@@ -34,4 +34,4 @@ jobs:
 
     - run: buildah build --net=host --manifest localhost/doge-image --platform linux/arm64,linux/amd64,linux/ppc64le,linux/s390x .
 
-    - run: podman manifest push --all localhost/doge-image quay.io/nalind/doge-image
+    - run: podman manifest push --all --format v2s2 localhost/doge-image quay.io/nalind/doge-image
