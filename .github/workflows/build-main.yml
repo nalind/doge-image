@@ -41,4 +41,8 @@ jobs:
 
     - run: if test "${GITHUB_EVENT_NAME}" = create -a "${GITHUB_REF_TYPE}" = tag ; then echo PUSH_TAG="${GITHUB_REF_NAME}" >> ${GITHUB_ENV} ; fi
 
+    - run: if test "${PUSH_TAG}" = "" ; then echo -n PUSH_TAG= >> ${GITHUB_ENV} ; podman run --quiet --rm localhost/doge-image rpm -q --qf '%{version}-%{release}' doge >> ${GITHUB_ENV} ; fi
+
     - run: podman manifest push --all --format v2s2 localhost/doge-image quay.io/nalind/doge-image:"${PUSH_TAG:-latest}"
+
+    - run: podman manifest push --all --format v2s2 localhost/doge-image quay.io/nalind/doge-image:latest
