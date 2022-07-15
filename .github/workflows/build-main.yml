@@ -24,7 +24,7 @@ jobs:
         registry: quay.io
 
 #    - run: sudo podman run --net=host --rm --privileged ghcr.io/nalind/fedora-qemu-user-static register
-    - run: sudo podman run --net=host --rm --privileged multiarch/qemu-user-static:register
+    - run: sudo podman run --net=host --rm --privileged multiarch/qemu-user-static register
 
 #    - uses: redhat-actions/buildah-build@v2
 #      with:
