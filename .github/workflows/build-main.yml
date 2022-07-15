@@ -36,7 +36,7 @@ jobs:
 
     - run: echo FEDORARELEASE=`curl -q https://endoflife.date/api/fedora.json | jq -r '.[0].latest'` >> ${GITHUB_ENV}
 
-    - run: buildah build --net=host --manifest localhost/doge-image --platform linux/arm64,linux/amd64,linux/ppc64le,linux/s390x --build-arg FEDORARELEASE=${FEDORARELEASE:-latest} .
+    - run: buildah build --layers --net=host --manifest localhost/doge-image --platform linux/arm64,linux/amd64,linux/ppc64le,linux/s390x --build-arg FEDORARELEASE=${FEDORARELEASE:-latest} .
 
     - run: if test "${GITHUB_EVENT_NAME}" = create -a "${GITHUB_REF_TYPE}" = tag ; then echo PUSH_TAG="${GITHUB_REF_NAME}" >> ${GITHUB_ENV} ; fi
 
